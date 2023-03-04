@@ -1,3 +1,18 @@
 <div class="login-form-component">
-  <p>login-form works!</p>
+  <div
+    class="login-form-component d-flex flex-column align-items-center justify-content-center align-items-lg-start justify-content-lg-start">
+    <h1 class="mt-5 login-title">
+      Quantum Git
+    </h1>
+    <p class="text-secondary mt-3">
+      Your privacy is the most important thing for us. We do not share your personal information with anyone. For that,
+      we need that you log in to the app with your Github account.
+    </p>
+    <button type="submit" (click)="loginWithGithub()" class="w-100 btn btn-lg btn-light mt-4 fw-bold py-3 rounded-pill border">
+      <div class="d-flex justify-content-center align-items-center">
+        <img src="assets/img/github-logo.svg" width="32" alt="Github-Logo" class="me-4"/>
+        <span>Log In with Github</span>
+      </div>
+    </button>
+  </div>
 </div>
