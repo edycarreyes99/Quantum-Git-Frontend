@@ -7,13 +7,16 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 
 
 @NgModule({
-  declarations: [
-    UsersViewComponent,
-    UserInfoComponent
-  ],
-  imports: [
-    CommonModule,
-    UsersRoutingModule
-  ]
+    declarations: [
+        UsersViewComponent,
+        UserInfoComponent
+    ],
+    exports: [
+        UserInfoComponent
+    ],
+    imports: [
+        CommonModule,
+        UsersRoutingModule
+    ]
 })
 export class UsersModule { }
