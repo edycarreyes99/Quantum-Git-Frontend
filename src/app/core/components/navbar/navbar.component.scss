@@ -1,0 +1,11 @@
+.navbar-component {
+  .navbar-container {
+    padding-left: 1.3rem !important;
+  }
+
+  .profile-avatar {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

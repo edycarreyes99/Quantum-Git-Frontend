@@ -1,0 +1,22 @@
+<div class="navbar-component">
+  <nav class="navbar navbar-expand-lg bg-light border-bottom">
+    <div class="container-fluid navbar-container py-2 d-flex align-items-center justify-content-between">
+      <span class="navbar-brand ms-3">Quantum Git</span>
+      <div class="p-1 rounded-circle profile-avatar" style="width: 49px; height: 49px; background-color: dodgerblue;"
+           [matMenuTriggerFor]="profileMenu" [matTooltip]="user!.displayName!">
+        <div
+          mat-card-avatar
+          [style.background-size]="'cover'"
+          [style.background-image]="'url(\'' + user?.photoURL + '\')'">
+        </div>
+      </div>
+
+      <mat-menu #profileMenu="matMenu">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Log out</span>
+        </button>
+      </mat-menu>
+    </div>
+  </nav>
+</div>
