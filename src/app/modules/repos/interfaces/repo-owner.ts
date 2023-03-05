@@ -1,4 +1,4 @@
-export interface RepoOwner {
+export interface IRepoOwner {
   login: string;
   id: number;
   node_id: string;
