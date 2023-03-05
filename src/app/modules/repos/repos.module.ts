@@ -6,6 +6,10 @@ import {ReposViewComponent} from './components/repos-view/repos-view.component';
 import {ReposListComponent} from './components/repos-list/repos-list.component';
 import {RepoListItemComponent} from './components/repo-list-item/repo-list-item.component';
 import {ReposService} from "./services/repos.service";
+import {MatCardModule} from "@angular/material/card";
+import {MatButtonModule} from "@angular/material/button";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatChipsModule} from "@angular/material/chips";
 
 
 @NgModule({
@@ -16,7 +20,11 @@ import {ReposService} from "./services/repos.service";
   ],
   imports: [
     CommonModule,
-    ReposRoutingModule
+    ReposRoutingModule,
+    MatCardModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatChipsModule
   ],
   providers: [
     ReposService

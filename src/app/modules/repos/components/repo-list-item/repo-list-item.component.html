@@ -1,3 +1,32 @@
 <div class="repo-list-item-component">
-  <p>repo-list-item works!</p>
+  <mat-card class="shadow-none border-0 bg-light">
+    <mat-card-header>
+      <mat-card-title class="d-flex justify-content-start align-items-center">
+        <div class="title text-primary fw-semibold">
+          {{repo?.name}}
+        </div>
+
+        <mat-chip-option
+          class="bg-transparent border ms-2 p-0"
+          style="height: 1.5rem; font-size: 12px;"
+          [selectable]="false"
+          [disableRipple]="true">
+          {{repo?.private ? 'Private' : 'Public'}}
+        </mat-chip-option>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p style="color: #57606a !important;">{{repo?.description}}</p>
+      <mat-chip-listbox aria-label="topics list" [selectable]="false" *ngIf="repo?.topics?.length">
+        <mat-chip-option
+          *ngFor="let topic of repo?.topics"
+          class="ms-2 p-0 topic text-primary"
+          [disableRipple]="true">
+          <span class="text-primary">{{topic}}</span>
+        </mat-chip-option>
+      </mat-chip-listbox>
+    </mat-card-content>
+    <mat-card-actions align="end">
+    </mat-card-actions>
+  </mat-card>
 </div>

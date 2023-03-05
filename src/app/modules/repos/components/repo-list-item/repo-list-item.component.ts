@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {IRepo} from "../../interfaces/repo";
 
 @Component({
   selector: 'app-repo-list-item',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./repo-list-item.component.scss']
 })
 export class RepoListItemComponent {
+  // Input Variables
+  @Input() repo: IRepo | undefined;
 
 }
