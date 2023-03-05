@@ -4,19 +4,29 @@ import {Router} from "@angular/router";
 import firebase from "firebase/compat/app";
 import {CURRENT_USER_LS, GITHUB_ACCESS_TOKEN_LS} from "../../../core/constants/local-storage.constants";
 import {User} from "@angular/fire/auth";
+import {Octokit} from "octokit";
+import {GET_CURRENT_FROM_GITHUB_URL} from "../../../core/constants/api/user.constants";
+import {IUser} from "../../users/interfaces/user";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  // Service Variables
+  accessToken: string = '';
+  octokit: Octokit | undefined;
 
   constructor(
     private angularFireAuth: AngularFireAuth,
     private router: Router,
   ) {
+    this.accessToken = localStorage.getItem(GITHUB_ACCESS_TOKEN_LS) ?? '';
+    this.octokit = new Octokit({
+      auth: this.accessToken
+    });
   }
 
-  // Method to login with firebase and the custom provider
+  // Method to log in with firebase and the custom provider
   firebaseSocialLogin(provider: firebase.auth.GithubAuthProvider_Instance): Promise<firebase.User> {
     return new Promise<firebase.User>(async (resolve, rejects) => {
       this.angularFireAuth.signInWithPopup(provider).then(async (res: firebase.auth.UserCredential) => {
@@ -27,9 +37,11 @@ export class AuthService {
           resolve(res.user);
         } else {
           console.error('User does not exists');
+          rejects();
         }
       }).catch((error) => {
         console.error('Error doing login with GitHub:', error);
+        rejects(error);
       })
     });
   }
@@ -52,8 +64,18 @@ export class AuthService {
   }
 
   // Method to get the current user
-  getCurrentUser(): User | undefined {
+  getCurrentUserFromFirebase(): User | undefined {
     const userData = localStorage.getItem(CURRENT_USER_LS);
     return userData ? JSON.parse(userData ?? '') : null;
+  }
+
+  getCurrentUserFromGitHub(): Promise<IUser> {
+    return new Promise<IUser>(async (resolve, rejects) => {
+      await this.octokit?.request(GET_CURRENT_FROM_GITHUB_URL).then((user: Record<string, any>) => {
+        resolve(user['data']);
+      }).catch((error) => {
+        rejects(error);
+      });
+    });
   }
 }
