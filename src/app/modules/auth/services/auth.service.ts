@@ -21,7 +21,7 @@ export class AuthService {
         if (res.user) {
           localStorage.setItem(CURRENT_USER_LS, JSON.stringify(res.user));
           localStorage.setItem(GITHUB_ACCESS_TOKEN_LS, JSON.parse(JSON.stringify(res.credential?.toJSON())).accessToken);
-
+          await this.router.navigate(['repos']);
           resolve(res.user);
         } else {
           console.error('User does not exists');
