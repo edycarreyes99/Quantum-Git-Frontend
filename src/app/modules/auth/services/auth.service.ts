@@ -3,6 +3,7 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 import firebase from "firebase/compat/app";
 import {CURRENT_USER_LS, GITHUB_ACCESS_TOKEN_LS} from "../../../core/constants/local-storage.constants";
+import {User} from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthService {
   ) {
   }
 
+  // Method to login with firebase and the custom provider
   firebaseSocialLogin(provider: firebase.auth.GithubAuthProvider_Instance): Promise<firebase.User> {
     return new Promise<firebase.User>(async (resolve, rejects) => {
       this.angularFireAuth.signInWithPopup(provider).then(async (res: firebase.auth.UserCredential) => {
@@ -32,6 +34,7 @@ export class AuthService {
     });
   }
 
+  // Method to create the GitHub provider and login with firebase
   gitHubLogin(): Promise<firebase.User> {
     return new Promise<firebase.User>(async (resolve, rejects) => {
       const provider = new firebase.auth.GithubAuthProvider();
@@ -40,10 +43,17 @@ export class AuthService {
     });
   }
 
+  // Method to do log out
   async logout(): Promise<void> {
     await this.angularFireAuth.signOut();
     await localStorage.clear();
     await sessionStorage.clear();
     location.reload();
+  }
+
+  // Method to get the current user
+  getCurrentUser(): User | undefined {
+    const userData = localStorage.getItem(CURRENT_USER_LS);
+    return userData ? JSON.parse(userData ?? '') : null;
   }
 }
