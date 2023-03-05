@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class LoginFormComponent {
 
+  loginWithGithub() {
+    // ToDo implements the firebase github login
+  }
 }
