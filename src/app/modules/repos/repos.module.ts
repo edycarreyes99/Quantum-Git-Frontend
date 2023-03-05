@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { ReposRoutingModule } from './repos-routing.module';
 import { ReposViewComponent } from './components/repos-view/repos-view.component';
+import { ReposListComponent } from './components/repos-list/repos-list.component';
 
 
 @NgModule({
   declarations: [
-    ReposViewComponent
+    ReposViewComponent,
+    ReposListComponent
   ],
   imports: [
     CommonModule,
