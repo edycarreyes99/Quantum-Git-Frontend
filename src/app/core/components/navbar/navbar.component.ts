@@ -15,7 +15,7 @@ export class NavbarComponent {
     private authService: AuthService,
     private router: Router
   ) {
-    this.user = this.authService.getCurrentUser();
+    this.user = this.authService.getCurrentUserFromFirebase();
   }
 
   // Method to do log out
