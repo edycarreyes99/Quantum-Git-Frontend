@@ -1,17 +1,9 @@
 <div class="repos-list-component">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 bg-primary">
-        algo
-      </div>
-      <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
-        <div class="repo-item" *ngFor="let repo of repos">
-          <app-repo-list-item
-            [repo]="repo"
-          ></app-repo-list-item>
-          <mat-divider class="my-3"></mat-divider>
-        </div>
-      </div>
-    </div>
-  </div>
+  <ng-container *ngFor="let repo of repos; let lastRepo = last">
+    <app-repo-list-item [repo]="repo">
+    </app-repo-list-item>
+
+    <mat-divider class="my-3" *ngIf="!lastRepo">
+    </mat-divider>
+  </ng-container>
 </div>

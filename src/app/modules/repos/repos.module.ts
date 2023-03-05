@@ -10,6 +10,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatChipsModule} from "@angular/material/chips";
+import {UsersModule} from "../users/users.module";
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {MatChipsModule} from "@angular/material/chips";
     MatCardModule,
     MatButtonModule,
     MatDividerModule,
-    MatChipsModule
+    MatChipsModule,
+    UsersModule
   ],
   providers: [
     ReposService
