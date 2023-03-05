@@ -1,4 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@include mat.core();
+
+$quantum-git-primary: mat.define-palette(mat.$light-blue-palette, 500);
+$quantum-git-accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
+$quantum-git-warn: mat.define-palette(mat.$red-palette);
+$quantum-git-typography: mat.define-typography-config(
+  $font-family: 'Montserrat'
+);
+
+$quantum-git-theme: mat.define-light-theme((
+  color: (
+    primary: $quantum-git-primary,
+    accent: $quantum-git-accent,
+    warn: $quantum-git-warn
+  ),
+  typography: $quantum-git-typography,
+  density: 0,
+));
+
+@include mat.all-component-themes($quantum-git-theme);
+@include mat.all-component-typographies($quantum-git-typography);
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', "SansSerif", sans-serif;
+}
