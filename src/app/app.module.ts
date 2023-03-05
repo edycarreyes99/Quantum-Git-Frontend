@@ -6,19 +6,27 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
 import {environment} from "../environments/environment";
-import {AngularFireAuth, AngularFireAuthModule} from "@angular/fire/compat/auth";
-import {getAuth, provideAuth} from "@angular/fire/auth";
 import {FIREBASE_OPTIONS} from "@angular/fire/compat";
+import {NavbarComponent} from './core/components/navbar/navbar.component';
+import {MatMenuModule} from "@angular/material/menu";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    provideFirebaseApp(() => initializeApp(environment.FIREBASE_CONFIG))
+    provideFirebaseApp(() => initializeApp(environment.FIREBASE_CONFIG)),
+    MatMenuModule,
+    MatTooltipModule,
+    MatCardModule,
+    MatIconModule
   ],
   providers: [
     {
