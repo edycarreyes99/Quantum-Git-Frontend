@@ -10,7 +10,7 @@
     {{user?.login}}
   </h2>
 
-  <span class="bio">
+  <span class="bio" *ngIf="user?.bio">
     {{user?.bio ?? '--- No Bio ---'}}
   </span>
 
