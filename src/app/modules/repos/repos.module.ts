@@ -11,6 +11,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatChipsModule} from "@angular/material/chips";
 import {UsersModule} from "../users/users.module";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {UsersModule} from "../users/users.module";
     MatButtonModule,
     MatDividerModule,
     MatChipsModule,
-    UsersModule
+    UsersModule,
+    MatIconModule
   ],
   providers: [
     ReposService

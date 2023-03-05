@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {IRepo} from "../../interfaces/repo";
+import {DevelopmentLanguageColors} from "../../../../core/utils/development-language-colors";
 
 @Component({
   selector: 'app-repo-list-item',
@@ -13,5 +14,12 @@ export class RepoListItemComponent {
   // Method to pen a new tab in the browser with the topic selected
   showTopic(topic: string) {
     window.open(`https://www.github.com/topics/${topic}`, '_blank');
+  }
+
+  // Method to find the development language color of the repository
+  getLanguageColor(): string | undefined {
+    const colors = DevelopmentLanguageColors;
+
+    return colors.find((color) => color.name === this.repo?.language)?.color
   }
 }

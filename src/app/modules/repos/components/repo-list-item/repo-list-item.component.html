@@ -21,12 +21,34 @@
         <mat-chip-option
           *ngFor="let topic of repo?.topics"
           class="ms-2 p-0 topic text-primary"
-        (click)="showTopic(topic)">
+          (click)="showTopic(topic)">
           <span class="text-primary text-decoration-none">
             {{topic}}
           </span>
         </mat-chip-option>
       </mat-chip-listbox>
+
+      <div class="d-flex justify-content-start align-items-center mt-3">
+        <div class="development-language d-flex justify-content-start align-items-center me-2" *ngIf="!!repo?.language">
+          <mat-icon
+            [style.color]="getLanguageColor()"
+            class="me-1 repo-general-info-icon">
+            circle
+          </mat-icon>
+          {{repo?.language}}
+        </div>
+
+        <div class="licence d-flex justify-content-start align-items-center me-2" *ngIf="repo?.license">
+          <mat-icon class="me-1 repo-general-info-icon text-dark">
+            balance
+          </mat-icon>
+          {{repo?.license}}
+        </div>
+
+        <div class="last-updated d-flex justify-content-start align-items-center">
+
+        </div>
+      </div>
     </mat-card-content>
     <mat-card-actions align="end">
     </mat-card-actions>

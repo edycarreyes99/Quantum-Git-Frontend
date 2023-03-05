@@ -11,4 +11,12 @@
     font-size: 12px;
     background-color: rgb(221, 244, 255);
   }
+
+  .development-language {
+    font-size: 12px;
+
+    .repo-general-info-icon {
+      transform: scale(.8);
+    }
+  }
 }
