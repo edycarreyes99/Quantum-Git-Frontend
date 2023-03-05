@@ -1,3 +1,51 @@
 .user-info-component {
-  // Write your styles here
+  .profile-photo {
+    width: 260px;
+    height: 260px;
+    border: solid 1px gray;
+  }
+
+  .name {
+    font-size: 24px;
+  }
+
+  .username {
+    font-size: 20px;
+  }
+
+  .bio {
+    font-size: 16px;
+  }
+
+  .followers, .following {
+    text-decoration: none;
+
+    &:hover {
+      cursor: pointer;
+      color: dodgerblue !important;
+
+      .text-secondary {
+        color: dodgerblue !important;
+      }
+
+      .text-dark {
+        color: dodgerblue !important;
+      }
+    }
+  }
+
+  .contact-info {
+    font-size: 12px;
+    .mail, .blog, .twitter {
+      a {
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+          color: dodgerblue !important;
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }

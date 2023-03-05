@@ -1,3 +1,63 @@
 <div class="user-info-component">
-  <p>user-info works!</p>
+  <div class="w-100 d-flex justify-content-center align-items-center">
+    <img [src]="user?.avatar_url" alt="User Avatar" class="rounded-circle mt-3 profile-photo shadow-lg">
+  </div>
+  <h1 class="fw-bold mt-3 mb-0 text-dark name">
+    {{user?.name}}
+  </h1>
+
+  <h2 class="text-secondary mt-0 username">
+    {{user?.login}}
+  </h2>
+
+  <span class="bio">
+    {{user?.bio ?? '--- No Bio ---'}}
+  </span>
+
+  <div class="follows mt-3 d-flex justify-content-start align-items-center">
+    <a class="followers d-flex justify-content-start align-items-center fs-6 me-1" target="_blank"
+       [href]="'https://www.github.com/' + user?.login + '?tab=followers'">
+      <mat-icon class="me-1 text-secondary material-icons-outlined">group</mat-icon>
+      <span class="fw-bold text-dark">{{user?.followers}}</span>
+      <span class="text-secondary ms-1">followers</span>
+    </a>
+
+    &bull;
+
+    <a class="following fs-6 ms-1" target="_blank" [href]="'https://www.github.com/' + user?.login + '?tab=following'">
+      <span class="fw-bold text-dark">{{user?.following}}</span>
+      <span class="text-secondary ms-1">following</span>
+    </a>
+  </div>
+
+  <div class="contact-info mt-3">
+    <div class="location d-flex justify-content-start align-items-center" *ngIf="!!user?.location">
+      <mat-icon class="me-1 text-dark material-icons-outlined">location_on</mat-icon>
+      <span class="text-dark">
+        {{user?.location}}
+      </span>
+    </div>
+
+    <div class="mail d-flex justify-content-start align-items-center mt-2" *ngIf="!!user?.email">
+      <mat-icon class="me-1 text-dark material-icons-outlined">mail</mat-icon>
+      <a class="text-dark" [href]="'mailto:'+user?.email">
+        {{user?.email}}
+      </a>
+    </div>
+
+    <div class="blog d-flex justify-content-start align-items-center mt-2" *ngIf="!!user?.blog">
+      <mat-icon class="me-1 text-dark material-icons-outlined">link</mat-icon>
+      <a class="text-dark text-break" [href]="user?.blog" target="_blank">
+        {{user?.blog}}
+      </a>
+    </div>
+
+    <div class="twitter d-flex justify-content-start align-items-center mt-2" *ngIf="!!user?.twitter_username">
+      <span class="iconify me-1 text-dark material-icons-outlined" data-icon="mdi:twitter"></span>
+      <a class="text-dark text-break" [href]="user?.twitter_username" target="_blank">
+        @{{user?.twitter_username}}
+      </a>
+    </div>
+  </div>
+
 </div>
