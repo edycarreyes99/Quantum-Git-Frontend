@@ -10,4 +10,8 @@ export class RepoListItemComponent {
   // Input Variables
   @Input() repo: IRepo | undefined;
 
+  // Method to pen a new tab in the browser with the topic selected
+  showTopic(topic: string) {
+    window.open(`https://www.github.com/topics/${topic}`, '_blank');
+  }
 }

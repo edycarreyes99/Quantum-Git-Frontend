@@ -21,8 +21,10 @@
         <mat-chip-option
           *ngFor="let topic of repo?.topics"
           class="ms-2 p-0 topic text-primary"
-          [disableRipple]="true">
-          <span class="text-primary">{{topic}}</span>
+        (click)="showTopic(topic)">
+          <span class="text-primary text-decoration-none">
+            {{topic}}
+          </span>
         </mat-chip-option>
       </mat-chip-listbox>
     </mat-card-content>
