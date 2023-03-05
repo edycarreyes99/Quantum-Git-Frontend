@@ -6,6 +6,15 @@ const routes: Routes = [
   {
     path: '',
     component: ReposViewComponent
+  },
+  {
+    path: ':componentId',
+    children: [
+      {
+        path: 'commits',
+        loadChildren: () => import('../commits/commits.module').then((module) => module.CommitsModule),
+      }
+    ]
   }
 ];
 
