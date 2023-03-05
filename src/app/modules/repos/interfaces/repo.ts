@@ -1,13 +1,13 @@
-import {RepoOwner} from "./repo-owner";
-import {RepoPermission} from "./repo-permission";
+import {IRepoOwner} from "./repo-owner";
+import {IRepoPermission} from "./repo-permission";
 
-export interface Repo {
+export interface IRepo {
   id: number;
   node_id: string;
   name: string;
   full_name: string;
   private: boolean;
-  owner: RepoOwner;
+  owner: IRepoOwner;
   html_url: string;
   description?: any;
   fork: boolean;
@@ -81,5 +81,5 @@ export interface Repo {
   open_issues: number;
   watchers: number;
   default_branch: string;
-  permissions: RepoPermission;
+  permissions: IRepoPermission;
 }
