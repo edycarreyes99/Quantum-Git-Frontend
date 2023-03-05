@@ -1,4 +1,4 @@
-export interface RepoPermission {
+export interface IRepoPermission {
   admin: boolean;
   maintain: boolean;
   push: boolean;
