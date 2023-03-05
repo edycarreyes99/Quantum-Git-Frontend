@@ -4,6 +4,7 @@ import {GITHUB_ACCESS_TOKEN_LS} from "../../../core/constants/local-storage.cons
 import {IRepo} from "../interfaces/repo";
 import {REPO_INDEX_URL} from "../../../core/constants/api/repo.constants";
 import {DEFAULT_API_REQUEST_HEADERS} from "../../../core/constants/api/global-api.constants";
+import {IRepoPaginationOptions} from "../interfaces/repo-pagination-options";
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +21,14 @@ export class ReposService {
     });
   }
 
-  async index(): Promise<IRepo[]> {
+  async index(paginationOptions: IRepoPaginationOptions): Promise<IRepo[]> {
     return new Promise<IRepo[]>(async (resolve, rejects) => {
-      await this.octokit?.request(REPO_INDEX_URL, DEFAULT_API_REQUEST_HEADERS).then((repos: Record<string, any>) => {
+      await this.octokit?.request(REPO_INDEX_URL, paginationOptions as any).then((repos: Record<string, any>) => {
         console.log('Repositories are:', repos)
         resolve(repos['data']);
       }).catch((error) => {
         console.error('Error fetching repositories for the current user logged in:', error);
+        rejects(error);
       });
     });
   }

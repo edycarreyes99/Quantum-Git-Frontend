@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ReposService} from "../../services/repos.service";
 import {IRepo} from "../../interfaces/repo";
+import {RepoPaginationOptions} from "../../models/repo-pagination-options";
 
 @Component({
   selector: 'app-repos-list',
@@ -22,7 +23,8 @@ export class ReposListComponent implements OnInit {
 
   async fetchAllRepos(): Promise<IRepo[]> {
     return new Promise<IRepo[]>(async (resolve, rejects) => {
-      await this.reposService.index().then((repos) => {
+      const paginationOptions = new RepoPaginationOptions();
+      await this.reposService.index(paginationOptions).then((repos) => {
         this.repos = repos;
         console.log('Repos are:', this.repos);
         resolve(repos);
