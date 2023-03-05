@@ -6,6 +6,9 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
 import {environment} from "../environments/environment";
+import {AngularFireAuth, AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {getAuth, provideAuth} from "@angular/fire/auth";
+import {FIREBASE_OPTIONS} from "@angular/fire/compat";
 
 @NgModule({
   declarations: [
@@ -15,9 +18,13 @@ import {environment} from "../environments/environment";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    provideFirebaseApp(() => initializeApp(environment.FIREBASE_CONFIG)),
+    provideFirebaseApp(() => initializeApp(environment.FIREBASE_CONFIG))
   ],
-  providers: [],
+  providers: [
+    {
+      provide: FIREBASE_OPTIONS, useValue: environment.FIREBASE_CONFIG
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

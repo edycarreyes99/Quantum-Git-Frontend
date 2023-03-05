@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {AuthService} from "../../services/auth.service";
+import firebase from "firebase/compat/app";
 
 @Component({
   selector: 'app-login-form',
@@ -6,8 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent {
+  constructor(
+    private authService: AuthService
+  ) {
+  }
 
-  loginWithGithub() {
-    // ToDo implements the firebase github login
+  loginWithGithub(): Promise<firebase.User> {
+    return new Promise<firebase.User>(async (resolve, rejects) => {
+      await this.authService.gitHubLogin().then((user) => resolve(user)).catch((error) => rejects(error));
+    });
   }
 }
