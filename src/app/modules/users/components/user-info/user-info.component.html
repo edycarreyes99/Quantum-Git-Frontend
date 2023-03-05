@@ -54,7 +54,7 @@
 
     <div class="twitter d-flex justify-content-start align-items-center mt-2" *ngIf="!!user?.twitter_username">
       <span class="iconify me-1 text-dark material-icons-outlined" data-icon="mdi:twitter"></span>
-      <a class="text-dark text-break" [href]="user?.twitter_username" target="_blank">
+      <a class="text-dark text-break" [href]="'https://www.twitter.com/' + user?.twitter_username" target="_blank">
         @{{user?.twitter_username}}
       </a>
     </div>
