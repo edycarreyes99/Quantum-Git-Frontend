@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "quantum-git": {
+      "hosting": {
+        "quantum-git": [
+          "quantum-git"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "quantum-git"
+  }
+}

@@ -108,6 +108,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "quantum-git:build:production",
+            "firebaseProject": "quantum-git",
+            "firebaseHostingSite": "quantum-git"
+          }
         }
       }
     }
