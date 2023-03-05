@@ -18,4 +18,8 @@ export class LoginFormComponent {
       await this.authService.gitHubLogin().then((user) => resolve(user)).catch((error) => rejects(error));
     });
   }
+
+  async logout(): Promise<void> {
+    await this.authService.logout();
+  }
 }
