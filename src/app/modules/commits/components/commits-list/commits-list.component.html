@@ -35,6 +35,18 @@
     </div>
   </ng-container>
 
+  <ng-container *ngIf="!loading && !empty">
+    <div class="mb-5 paginator">
+      <app-quantum-git-paginator
+        #quantumGitPaginator
+        (firstPage)="fetchCommits($event)"
+        (previousPage)="fetchCommits($event)"
+        (nextPage)="fetchCommits($event)"
+        (lastPage)="fetchCommits($event)"
+      ></app-quantum-git-paginator>
+    </div>
+  </ng-container>
+
   <ng-container *ngIf="loading">
     <div class="d-flex justify-content-center align-items-center mt-5">
       <mat-spinner></mat-spinner>

@@ -1,10 +1,13 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {IBranch} from "../../../branches/interfaces/branch";
 import {CommitsService} from "../../services/commits.service";
 import {ICommit} from "../../interfaces/commit";
 import * as moment from "moment";
 import {IGroupedCommits} from "../../interfaces/grouped-commits";
+import {
+  QuantumGitPaginatorComponent
+} from "../../../../core/components/quantum-git-paginator/quantum-git-paginator.component";
 
 @Component({
   selector: 'app-commits-list',
@@ -12,6 +15,9 @@ import {IGroupedCommits} from "../../interfaces/grouped-commits";
   styleUrls: ['./commits-list.component.scss']
 })
 export class CommitsListComponent {
+  // ViewChild Variables
+  @ViewChild('quantumGitPaginator') quantumGitPaginator: QuantumGitPaginatorComponent | undefined;
+
   // Component Variable
   repoName: string | undefined;
   selectedBranch: IBranch | undefined;
@@ -29,20 +35,35 @@ export class CommitsListComponent {
     });
   }
 
-  fetchCommits(): Promise<ICommit[]> {
+  fetchCommits(page?: number | undefined): Promise<ICommit[]> {
     return new Promise<ICommit[]>(async (resolve, rejects) => {
       this.loading = true;
-      await this.commitsService.index(this.selectedBranch?.commit.sha ?? '', this.repoName ?? '')
+      await this.commitsService.index(this.selectedBranch?.commit.sha ?? '', this.repoName ?? '', page)
         .then((commits) => {
           this.commits = commits;
           this.groupCommitsByDate();
           if (this.commits.length === 0)
             this.empty = true;
 
+          setTimeout(() => {
+            if (!this.empty)
+              this.quantumGitPaginator?.parsePaginationString(this.commits[0].pagination)
+          }, 500);
+
           this.loading = false;
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          });
           resolve(commits);
         }).catch((error) => {
           this.loading = false;
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          });
           rejects(error);
         });
     });

@@ -23,15 +23,19 @@ export class CommitsService {
     });
   }
 
-  index(branchSHA: string, repoName: string): Promise<ICommit[]> {
+  index(branchSHA: string, repoName: string, page?: number | undefined): Promise<ICommit[]> {
     return new Promise<ICommit[]>(async (resolve, rejects) => {
       await this.authService.getCurrentUserFromGitHub().then(async (githubUser) => {
         await this.octokit?.request(COMMITS_URL, {
           owner: githubUser.login,
           repo: repoName,
           sha: branchSHA,
+          page,
           per_page: 35
         }).then((commits: Record<string, any>) => {
+          commits['data'].forEach((commit: ICommit) => {
+            commit.pagination = commits['headers']['link'];
+          });
           resolve(commits['data']);
         }).catch((error) => {
           console.error('Error fetching commits for the selected branch and the user logged in and the repo passed:', error);

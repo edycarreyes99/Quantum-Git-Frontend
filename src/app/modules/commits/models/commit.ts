@@ -17,6 +17,7 @@ export class Commit implements ICommit {
   parents: IParentCommit[] = [];
   sha: string = '';
   url: string = '';
+  pagination: string = '';
 
   constructor(commit?: ICommit | undefined) {
     if (commit) {
@@ -29,6 +30,7 @@ export class Commit implements ICommit {
       this.parents = commit.parents;
       this.sha = commit.sha;
       this.url = commit.url;
+      this.pagination = commit.pagination;
     }
   }
 

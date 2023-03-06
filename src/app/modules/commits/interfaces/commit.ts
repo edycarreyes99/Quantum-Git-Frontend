@@ -13,4 +13,5 @@ export interface ICommit {
   author: IAuthor;
   committer: ICommitter;
   parents: IParentCommit[];
+  pagination: string;
 }
