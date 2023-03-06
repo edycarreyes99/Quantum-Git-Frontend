@@ -7,6 +7,10 @@
       <mat-divider class="my-3" *ngIf="!lastRepo">
       </mat-divider>
     </ng-container>
+
+    <div class="mb-5 paginator">
+      <app-quantum-git-paginator #quantumGitPaginator></app-quantum-git-paginator>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="loading">

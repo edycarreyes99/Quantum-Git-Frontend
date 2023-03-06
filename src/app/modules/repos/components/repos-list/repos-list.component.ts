@@ -1,7 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ReposService} from "../../services/repos.service";
 import {IRepo} from "../../interfaces/repo";
 import {RepoPaginationOptions} from "../../models/repo-pagination-options";
+import {
+  QuantumGitPaginatorComponent
+} from "../../../../core/components/quantum-git-paginator/quantum-git-paginator.component";
 
 @Component({
   selector: 'app-repos-list',
@@ -9,6 +12,9 @@ import {RepoPaginationOptions} from "../../models/repo-pagination-options";
   styleUrls: ['./repos-list.component.scss']
 })
 export class ReposListComponent implements OnInit {
+  // ViewChild Variables
+  @ViewChild('quantumGitPaginator') quantumGitPaginator: QuantumGitPaginatorComponent | undefined;
+
   // Component Variables
   repos: IRepo[] = [];
   loading: boolean = true;
@@ -32,6 +38,10 @@ export class ReposListComponent implements OnInit {
         this.loading = false;
         if (this.repos.length === 0)
           this.empty = true;
+        setTimeout(() => {
+          if (!this.empty)
+            this.quantumGitPaginator?.parsePaginationString(this.repos[0].pagination)
+        }, 500);
         resolve(repos);
       }).catch((error) => {
         console.error('Error fetching repos:', error);

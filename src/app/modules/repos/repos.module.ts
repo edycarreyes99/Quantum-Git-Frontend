@@ -13,6 +13,7 @@ import {MatChipsModule} from "@angular/material/chips";
 import {UsersModule} from "../users/users.module";
 import {MatIconModule} from "@angular/material/icon";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {QuatumGitPaginatorModule} from "../../core/components/quantum-git-paginator/quatum-git-paginator.module";
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
         MatChipsModule,
         UsersModule,
         MatIconModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        QuatumGitPaginatorModule
     ],
   providers: [
     ReposService

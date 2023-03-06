@@ -24,6 +24,9 @@ export class ReposService {
   async index(paginationOptions: IRepoPaginationOptions): Promise<IRepo[]> {
     return new Promise<IRepo[]>(async (resolve, rejects) => {
       await this.octokit?.request(REPOS_URL, paginationOptions as any).then((repos: Record<string, any>) => {
+        repos['data'].forEach((repo: IRepo) => {
+          repo.pagination = repos['headers']['link'];
+        })
         resolve(repos['data']);
       }).catch((error) => {
         console.error('Error fetching repositories for the current user logged in:', error);

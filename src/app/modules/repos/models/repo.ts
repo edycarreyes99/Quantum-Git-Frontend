@@ -86,6 +86,7 @@ export class Repo implements IRepo {
   watchers: number = 0;
   watchers_count: number = 0;
   web_commit_signoff_required: boolean = false;
+  pagination: string = '';
 
   constructor(repo?: IRepo | undefined) {
     if (repo) {
@@ -169,6 +170,7 @@ export class Repo implements IRepo {
       this.watchers = repo.watchers;
       this.watchers_count = repo.watchers_count;
       this.web_commit_signoff_required = repo.web_commit_signoff_required;
+      this.pagination = repo.pagination;
     }
   }
 

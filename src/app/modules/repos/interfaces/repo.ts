@@ -83,4 +83,5 @@ export interface IRepo {
   watchers: number;
   default_branch: string;
   permissions: IRepoPermission;
+  pagination: string;
 }
