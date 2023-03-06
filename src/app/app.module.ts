@@ -12,6 +12,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatMenuModule,
     MatTooltipModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     {

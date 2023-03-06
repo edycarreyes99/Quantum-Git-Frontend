@@ -52,7 +52,11 @@ export class AuthService {
     return new Promise<firebase.User>(async (resolve, rejects) => {
       const provider = new firebase.auth.GithubAuthProvider();
       provider.addScope('repo');
-      await this.firebaseSocialLogin(provider).then((user) => resolve(user)).catch((error) => rejects(error));
+      await this.firebaseSocialLogin(provider)
+        .then((user) => resolve(user))
+        .catch((error) => {
+          rejects(error);
+        });
     });
   }
 
