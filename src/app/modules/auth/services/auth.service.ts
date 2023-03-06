@@ -21,7 +21,6 @@ export class AuthService {
     private router: Router,
   ) {
     this.accessToken = localStorage.getItem(GITHUB_ACCESS_TOKEN_LS) ?? '';
-    console.log('Access token:', this.accessToken);
     this.octokit = new Octokit({
       auth: this.accessToken
     });

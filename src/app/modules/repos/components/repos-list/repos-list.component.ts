@@ -29,7 +29,6 @@ export class ReposListComponent implements OnInit {
       const paginationOptions = new RepoPaginationOptions();
       await this.reposService.index(paginationOptions).then((repos) => {
         this.repos = repos;
-        console.log('Repos are:', this.repos);
         this.loading = false;
         if (this.repos.length === 0)
           this.empty = true;

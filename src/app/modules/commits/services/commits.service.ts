@@ -32,7 +32,6 @@ export class CommitsService {
           sha: branchSHA,
           per_page: 35
         }).then((commits: Record<string, any>) => {
-          console.log('commits are:', commits)
           resolve(commits['data']);
         }).catch((error) => {
           console.error('Error fetching commits for the selected branch and the user logged in and the repo passed:', error);

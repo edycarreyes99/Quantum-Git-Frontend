@@ -24,7 +24,6 @@ export class UserInfoComponent implements OnInit {
     return new Promise<IUser>(async (resolve, rejects) => {
       await this.authService.getCurrentUserFromGitHub().then((user) => {
         this.user = user;
-        console.log('Current user from github is:', user);
         resolve(user);
       }).catch((error) => {
         console.error('Error fetching current user from github:', error);

@@ -69,10 +69,7 @@ export class CommitsListComponent {
       }
     });
 
-    console.log('Grouped commits are:', groupedCommits);
-
     this.groupedCommits = groupedCommits;
-
   }
 
 }
