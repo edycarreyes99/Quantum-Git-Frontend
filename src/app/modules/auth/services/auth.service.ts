@@ -21,6 +21,7 @@ export class AuthService {
     private router: Router,
   ) {
     this.accessToken = localStorage.getItem(GITHUB_ACCESS_TOKEN_LS) ?? '';
+    console.log('Access token:', this.accessToken);
     this.octokit = new Octokit({
       auth: this.accessToken
     });
@@ -33,6 +34,7 @@ export class AuthService {
         if (res.user) {
           localStorage.setItem(CURRENT_USER_LS, JSON.stringify(res.user));
           localStorage.setItem(GITHUB_ACCESS_TOKEN_LS, JSON.parse(JSON.stringify(res.credential?.toJSON())).accessToken);
+          this.accessToken = JSON.parse(JSON.stringify(res.credential?.toJSON())).accessToken;
           await this.router.navigate(['repos']);
           resolve(res.user);
         } else {
@@ -71,11 +73,26 @@ export class AuthService {
 
   getCurrentUserFromGitHub(): Promise<IUser> {
     return new Promise<IUser>(async (resolve, rejects) => {
-      await this.octokit?.request(GET_CURRENT_FROM_GITHUB_URL).then((user: Record<string, any>) => {
-        resolve(user['data']);
+      await this.initializeOctokit().then(async () => {
+        await this.octokit?.request(GET_CURRENT_FROM_GITHUB_URL).then((user: Record<string, any>) => {
+          resolve(user['data']);
+        }).catch((error) => {
+          rejects(error);
+        });
       }).catch((error) => {
-        rejects(error);
+        console.error('Error initializing octokit')
       });
+    });
+  }
+
+  // Method to initialize the octokit object
+  initializeOctokit(): Promise<void> {
+    return new Promise<void>(async (resolve, reject) => {
+      this.accessToken = await localStorage.getItem(GITHUB_ACCESS_TOKEN_LS) ?? '';
+      this.octokit = new Octokit({
+        auth: this.accessToken
+      });
+      resolve();
     });
   }
 }

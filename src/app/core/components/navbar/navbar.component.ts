@@ -21,11 +21,14 @@ export class NavbarComponent {
   // Method to do log out
   async logout(): Promise<void> {
     return new Promise<void>(async () => {
-      await this.authService.logout().then(async () => {
-        await this.router.navigate(['']);
+      await this.router.navigate(['auth/login']).then(async () => {
+        await this.authService.logout().then(async () => {
+        }).catch((error) => {
+          console.error('Error logging out:', error);
+        });
       }).catch((error) => {
-        console.error('Error logging out:', error);
-      });
+        console.error('Error navigating:', error);
+      })
     });
   }
 }
