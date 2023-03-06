@@ -45,7 +45,6 @@ export class BranchSelectionComponent implements OnInit {
     return new Promise<IBranch[]>(async (resolve, rejects) => {
       await this.branchesService.index(this.repoName ?? '').then((branches) => {
         this.branches = branches;
-        console.log('Branches are:', this.branches);
         this.initializeFilteredBranchesObservable();
         if (this.branches.length !== 0) {
           this.branchFormControl.setValue(this.branches[0]);

@@ -10,7 +10,8 @@
     <mat-autocomplete
       autoActiveFirstOption
       #branchesAutoComplete="matAutocomplete"
-      [displayWith]="getBranchName">
+      [displayWith]="getBranchName"
+      (optionSelected)="selectionChange.emit($event.option.value)">
       <mat-option *ngFor="let branch of filteredBranches | async" [value]="branch">
         {{branch['name']}}
       </mat-option>

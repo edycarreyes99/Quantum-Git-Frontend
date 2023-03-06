@@ -1,6 +1,6 @@
 <div class="commits-list-component">
   <app-branch-selection
     [repoName]="repoName"
-    (selectionChange)="selectedBranch = $event;"
+    (selectionChange)="selectedBranch = $event; fetchCommits();"
   ></app-branch-selection>
 </div>

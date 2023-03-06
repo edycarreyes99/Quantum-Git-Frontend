@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {IBranch} from "../../../branches/interfaces/branch";
+import {CommitsService} from "../../services/commits.service";
 
 @Component({
   selector: 'app-commits-list',
@@ -14,9 +15,21 @@ export class CommitsListComponent {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private commitsService: CommitsService
   ) {
     this.activatedRoute.params.subscribe((params) => {
       this.repoName = params['repoName'];
+    });
+  }
+
+  fetchCommits(): Promise<any[]> {
+    return new Promise<any[]>(async (resolve, rejects) => {
+      await this.commitsService.index(this.selectedBranch?.commit.sha ?? '', this.repoName ?? '')
+        .then((commits) => {
+          resolve(commits);
+        }).catch((error) => {
+          rejects(error);
+        });
     });
   }
 

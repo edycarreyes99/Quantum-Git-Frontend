@@ -32,7 +32,6 @@ export class BranchesService {
           repo: repoName,
           per_page: 100
         }).then((branches: Record<string, any>) => {
-          console.log('branches are:', branches)
           resolve(branches['data']);
         }).catch((error) => {
           console.error('Error fetching branches for the current user logged in and the repo passed:', error);
