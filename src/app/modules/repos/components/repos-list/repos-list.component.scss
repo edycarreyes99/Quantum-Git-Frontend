@@ -1,3 +1,5 @@
 .repos-list-component {
-  // Write your code here
+  .loader {
+    min-height: calc(100vh - 100px);
+  }
 }

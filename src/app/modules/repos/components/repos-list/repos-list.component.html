@@ -1,9 +1,26 @@
 <div class="repos-list-component">
-  <ng-container *ngFor="let repo of repos; let lastRepo = last">
-    <app-repo-list-item [repo]="repo">
-    </app-repo-list-item>
+  <ng-container *ngIf="!loading && !empty">
+    <ng-container *ngFor="let repo of repos; let lastRepo = last">
+      <app-repo-list-item [repo]="repo">
+      </app-repo-list-item>
 
-    <mat-divider class="my-3" *ngIf="!lastRepo">
-    </mat-divider>
+      <mat-divider class="my-3" *ngIf="!lastRepo">
+      </mat-divider>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="loading">
+    <div class="w-100 d-flex justify-content-center align-items-center loader">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="empty">
+    <div class="w-100 d-inline-block justify-content-center align-items-center">
+      <img src="../../../../../assets/img/empty-illustration.svg" alt="Empty Illustration">
+      <div class="w-100 d-flex justify-content-center align-items-center">
+        <span class="fw-bold text-center">Repos are empty.</span>
+      </div>
+    </div>
   </ng-container>
 </div>

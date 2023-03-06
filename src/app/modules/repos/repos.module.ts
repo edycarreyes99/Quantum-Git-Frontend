@@ -12,6 +12,7 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatChipsModule} from "@angular/material/chips";
 import {UsersModule} from "../users/users.module";
 import {MatIconModule} from "@angular/material/icon";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -20,16 +21,17 @@ import {MatIconModule} from "@angular/material/icon";
     ReposListComponent,
     RepoListItemComponent
   ],
-  imports: [
-    CommonModule,
-    ReposRoutingModule,
-    MatCardModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatChipsModule,
-    UsersModule,
-    MatIconModule
-  ],
+    imports: [
+        CommonModule,
+        ReposRoutingModule,
+        MatCardModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatChipsModule,
+        UsersModule,
+        MatIconModule,
+        MatProgressSpinnerModule
+    ],
   providers: [
     ReposService
   ]
