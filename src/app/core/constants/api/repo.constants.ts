@@ -1,1 +1,1 @@
-export const REPO_INDEX_URL = 'GET /user/repos';
+export const REPOS_URL = 'GET /user/repos';

@@ -8,7 +8,7 @@ const routes: Routes = [
     component: ReposViewComponent
   },
   {
-    path: ':componentId',
+    path: ':repoName',
     children: [
       {
         path: 'commits',

@@ -5,6 +5,7 @@ import { CommitsRoutingModule } from './commits-routing.module';
 import { CommitsViewComponent } from './components/commits-view/commits-view.component';
 import { CommitsListComponent } from './components/commits-list/commits-list.component';
 import { CommitsListItemComponent } from './components/commits-list-item/commits-list-item.component';
+import {BranchesModule} from "../branches/branches.module";
 
 
 @NgModule({
@@ -13,9 +14,10 @@ import { CommitsListItemComponent } from './components/commits-list-item/commits
     CommitsListComponent,
     CommitsListItemComponent
   ],
-  imports: [
-    CommonModule,
-    CommitsRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        CommitsRoutingModule,
+        BranchesModule
+    ]
 })
 export class CommitsModule { }

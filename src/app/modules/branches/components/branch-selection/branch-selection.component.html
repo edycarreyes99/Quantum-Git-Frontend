@@ -1,1 +1,19 @@
-<p>branch-selection works!</p>
+<div class="branch-selection-component">
+  <mat-form-field class="w-100" appearance="outline">
+    <mat-label>Filter commits by branch</mat-label>
+    <input type="text"
+           placeholder="Select a branch"
+           aria-label="Branches"
+           matInput
+           [formControl]="branchFormControl"
+           [matAutocomplete]="branchesAutoComplete">
+    <mat-autocomplete
+      autoActiveFirstOption
+      #branchesAutoComplete="matAutocomplete"
+      [displayWith]="getBranchName">
+      <mat-option *ngFor="let branch of filteredBranches | async" [value]="branch">
+        {{branch['name']}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
