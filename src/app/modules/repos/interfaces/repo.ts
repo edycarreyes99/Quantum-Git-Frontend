@@ -1,5 +1,6 @@
 import {IRepoOwner} from "./repo-owner";
 import {IRepoPermission} from "./repo-permission";
+import * as moment from "moment";
 
 export interface IRepo {
   id: number;
@@ -48,9 +49,9 @@ export interface IRepo {
   labels_url: string;
   releases_url: string;
   deployments_url: string;
-  created_at: Date;
-  updated_at: Date;
-  pushed_at: Date;
+  created_at: moment.Moment;
+  updated_at: moment.Moment;
+  pushed_at: moment.Moment;
   git_url: string;
   ssh_url: string;
   clone_url: string;

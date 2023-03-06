@@ -3,6 +3,7 @@ import {IRepoOwner} from "../interfaces/repo-owner";
 import {RepoOwner} from "./repo-owner";
 import {IRepoPermission} from "../interfaces/repo-permission";
 import {RepoPermission} from "./repo-permission";
+import * as moment from "moment";
 
 export class Repo implements IRepo {
   allow_forking: boolean = false;
@@ -18,7 +19,7 @@ export class Repo implements IRepo {
   compare_url: string = '';
   contents_url: string = '';
   contributors_url: string = '';
-  created_at: Date = new Date();
+  created_at: moment.Moment = moment();
   default_branch: string = '';
   deployments_url: string = '';
   description: any;
@@ -65,7 +66,7 @@ export class Repo implements IRepo {
   permissions: IRepoPermission = new RepoPermission();
   private: boolean = false;
   pulls_url: string = '';
-  pushed_at: Date = new Date();
+  pushed_at: moment.Moment = moment();
   releases_url: string = '';
   size: number = 0;
   ssh_url: string = '';
@@ -79,7 +80,7 @@ export class Repo implements IRepo {
   teams_url: string = '';
   topics: string[] = [];
   trees_url: string = '';
-  updated_at: Date = new Date();
+  updated_at: moment.Moment = moment();
   url: string = '';
   visibility: string = '';
   watchers: number = 0;

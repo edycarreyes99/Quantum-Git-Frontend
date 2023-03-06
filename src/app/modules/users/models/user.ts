@@ -1,11 +1,12 @@
 import {IUser} from "../interfaces/user";
+import * as moment from "moment";
 
 export class User implements IUser {
   avatar_url: string = '';
   bio: string = '';
   blog: string = '';
   company: any;
-  created_at: Date = new Date();
+  created_at: moment.Moment = moment();
   email: string = '';
   events_url: string = '';
   followers: number = 0;
@@ -31,7 +32,7 @@ export class User implements IUser {
   subscriptions_url: string = '';
   twitter_username: string = '';
   type: string = '';
-  updated_at: Date = new Date();
+  updated_at: moment.Moment = moment();
   url: string = '';
 
   constructor(user?: IUser | undefined) {

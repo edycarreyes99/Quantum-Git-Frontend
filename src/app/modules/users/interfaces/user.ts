@@ -1,3 +1,5 @@
+import * as moment from "moment";
+
 export interface IUser {
   login: string;
   id: number;
@@ -29,6 +31,6 @@ export interface IUser {
   public_gists: number;
   followers: number;
   following: number;
-  created_at: Date;
-  updated_at: Date;
+  created_at: moment.Moment;
+  updated_at: moment.Moment;
 }
