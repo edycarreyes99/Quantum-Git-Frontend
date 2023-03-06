@@ -1,3 +1,11 @@
 .commits-list-component {
-  // Write your styles here
+  .branch-selection {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 900px) {
+    .branch-selection {
+      width: 50%;
+    }
+  }
 }

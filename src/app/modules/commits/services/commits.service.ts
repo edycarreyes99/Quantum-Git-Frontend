@@ -30,7 +30,7 @@ export class CommitsService {
           owner: githubUser.login,
           repo: repoName,
           sha: branchSHA,
-          per_page: 30
+          per_page: 35
         }).then((commits: Record<string, any>) => {
           console.log('commits are:', commits)
           resolve(commits['data']);

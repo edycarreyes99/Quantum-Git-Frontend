@@ -1,6 +1,16 @@
 <div class="commits-list-component">
-  <app-branch-selection
-    [repoName]="repoName"
-    (selectionChange)="selectedBranch = $event; fetchCommits();"
-  ></app-branch-selection>
+  <div class="branch-selection">
+    <app-branch-selection
+      [repoName]="repoName"
+      (selectionChange)="selectedBranch = $event; fetchCommits();"
+    ></app-branch-selection>
+  </div>
+
+  <app-commits-list-item
+    *ngFor="let commit of commits; let isFirst = first; let isLast = last;"
+    [commit]="commit"
+    [isFirstInList]="isFirst"
+    [isLastInList]="isLast"
+    [repoName]="repoName">
+  </app-commits-list-item>
 </div>

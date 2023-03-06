@@ -1,3 +1,61 @@
 <div class="commits-list-item">
-  <p>commits-list-item works!</p>
+  <div
+    [class.rounded-top]="isFirstInList"
+    [class.border-bottom]="isLastInList"
+    [class.rounded-bottom]="isLastInList"
+    class="border-top border-start border-end w-100 hover py-2 px-3 d-flex justify-content-between align-items-center">
+    <div class="commit-info">
+      <div class="commit-message">
+        <a
+          class="message"
+          target="_blank"
+          [href]="'https://www.github.com/' + commit?.committer?.login + '/' + repoName + '/commit/' + commit?.sha">
+          <span class="fw-bold">{{commit?.commit?.message}}</span>
+        </a>
+      </div>
+      <div class="committer d-flex justify-content-start align-items-center mt-2">
+        <a [href]="commit?.committer?.html_url" target="_blank" class="text-decoration-none">
+          <img
+            [src]="commit?.committer?.avatar_url"
+            alt="Committer Avatar"
+            class="rounded-circle"
+            width="20"
+            height="20">
+        </a>
+        <a
+          [href]="'https://www.github.com/' + commit?.committer?.login + '/' + repoName + '/commits?author=' + commit?.committer?.login"
+          target="_blank" class="committer-link">
+          <span class="text-dark ms-1 fw-bolder">
+            {{commit?.committer?.login}}
+          </span>
+        </a>
+        <span class="ms-1 text-secondary">
+        committed {{lastUpdated()}}
+      </span>
+      </div>
+    </div>
+
+    <div class="commit-actions d-none justify-content-center align-items-center d-md-flex">
+      <button mat-icon-button class="me-2" matTooltip="Copy the full SHA" (click)="copyToClipboard()">
+        <mat-icon class="material-icons-outlined">content_copy</mat-icon>
+      </button>
+
+      <a
+        mat-stroked-button
+        class="me-2 commit-details-button"
+        matTooltip="View commit details"
+        target="_blank"
+        [href]="'https://www.github.com/' + commit?.committer?.login + '/' + repoName + '/commit/' + commit?.sha">
+        {{commit?.sha| slice: 0:7}}
+      </a>
+
+      <a
+        mat-icon-button
+        matTooltip="Browse the repository at this point in the history"
+        target="_blank"
+        [href]="'https://www.github.com/' + commit?.committer?.login + '/' + repoName + '/tree/' + commit?.sha">
+        <mat-icon class="material-icons-outlined">code</mat-icon>
+      </a>
+    </div>
+  </div>
 </div>

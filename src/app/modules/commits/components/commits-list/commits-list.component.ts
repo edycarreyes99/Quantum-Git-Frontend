@@ -13,6 +13,7 @@ export class CommitsListComponent {
   // Component Variable
   repoName: string | undefined;
   selectedBranch: IBranch | undefined;
+  commits: ICommit[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -27,11 +28,25 @@ export class CommitsListComponent {
     return new Promise<ICommit[]>(async (resolve, rejects) => {
       await this.commitsService.index(this.selectedBranch?.commit.sha ?? '', this.repoName ?? '')
         .then((commits) => {
+          this.commits = commits;
+          // this.groupCommitsByDate();
           resolve(commits);
         }).catch((error) => {
           rejects(error);
         });
     });
+  }
+
+  // Method to group the commits by date
+  groupCommitsByDate() {
+    let i: number = 0;
+    let len: number = this.commits.length;
+    const groupedCommits: ICommit[][] = [];
+    const currentDateCommits: ICommit[] = [];
+
+    while (i < len) {
+    }
+
   }
 
 }
