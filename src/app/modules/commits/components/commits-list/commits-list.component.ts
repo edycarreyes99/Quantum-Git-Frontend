@@ -8,6 +8,7 @@ import {IGroupedCommits} from "../../interfaces/grouped-commits";
 import {
   QuantumGitPaginatorComponent
 } from "../../../../core/components/quantum-git-paginator/quantum-git-paginator.component";
+import {NotificationsService} from "../../../../core/services/notifications/notifications.service";
 
 @Component({
   selector: 'app-commits-list',
@@ -28,7 +29,8 @@ export class CommitsListComponent {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private commitsService: CommitsService
+    private commitsService: CommitsService,
+    private notificationsService: NotificationsService
   ) {
     this.activatedRoute.params.subscribe((params) => {
       this.repoName = params['repoName'];
@@ -64,6 +66,7 @@ export class CommitsListComponent {
             left: 0,
             behavior: 'smooth'
           });
+
           rejects(error);
         });
     });

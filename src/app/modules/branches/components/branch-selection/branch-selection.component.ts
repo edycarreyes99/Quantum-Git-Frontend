@@ -4,6 +4,8 @@ import {map, Observable, startWith} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {BranchesService} from "../../services/branches.service";
 import {IBranch} from "../../interfaces/branch";
+import {NotificationsService} from "../../../../core/services/notifications/notifications.service";
+import {ERROR_TOAST} from "../../../../core/constants/toast.constants";
 
 @Component({
   selector: 'app-branch-selection',
@@ -24,7 +26,8 @@ export class BranchSelectionComponent implements OnInit {
   filteredBranches: Observable<IBranch[]> = new Observable<IBranch[]>();
 
   constructor(
-    private branchesService: BranchesService
+    private branchesService: BranchesService,
+    private notificationsService: NotificationsService
   ) {
     this.selectionChange = new EventEmitter<IBranch>();
     this.emptyBranches = new EventEmitter<void>();
@@ -57,6 +60,11 @@ export class BranchSelectionComponent implements OnInit {
         resolve(branches);
       }).catch((error) => {
         console.error('Error fetching branches for the current repository:', error);
+        this.notificationsService.showToast(
+          ERROR_TOAST,
+          'Error Fetching Branches',
+          'An error occurred while fetching branches for the curren repository.'
+        );
         rejects(error);
       });
     });
