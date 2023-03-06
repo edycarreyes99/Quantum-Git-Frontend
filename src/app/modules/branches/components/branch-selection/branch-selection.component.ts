@@ -64,6 +64,7 @@ export class BranchSelectionComponent implements OnInit {
     return branch ? branch?.name : '';
   }
 
+  // Method to initialize the filtered branches observable
   initializeFilteredBranchesObservable(): void {
     this.filteredBranches = this.branchFormControl.valueChanges.pipe(
       startWith(''),
