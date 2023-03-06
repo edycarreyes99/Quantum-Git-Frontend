@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {IBranch} from "../../../branches/interfaces/branch";
 import {CommitsService} from "../../services/commits.service";
+import {ICommit} from "../../interfaces/commit";
 
 @Component({
   selector: 'app-commits-list',
@@ -22,8 +23,8 @@ export class CommitsListComponent {
     });
   }
 
-  fetchCommits(): Promise<any[]> {
-    return new Promise<any[]>(async (resolve, rejects) => {
+  fetchCommits(): Promise<ICommit[]> {
+    return new Promise<ICommit[]>(async (resolve, rejects) => {
       await this.commitsService.index(this.selectedBranch?.commit.sha ?? '', this.repoName ?? '')
         .then((commits) => {
           resolve(commits);

@@ -4,6 +4,7 @@ import {GITHUB_ACCESS_TOKEN_LS} from "../../../core/constants/local-storage.cons
 import {AuthService} from "../../auth/services/auth.service";
 import {COMMITS_URL} from "../../../core/constants/api/commits.constants";
 import * as moment from "moment";
+import {ICommit} from "../interfaces/commit";
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class CommitsService {
     });
   }
 
-  index(branchSHA: string, repoName: string): Promise<any[]> {
-    return new Promise<any[]>(async (resolve, rejects) => {
+  index(branchSHA: string, repoName: string): Promise<ICommit[]> {
+    return new Promise<ICommit[]>(async (resolve, rejects) => {
       await this.authService.getCurrentUserFromGitHub().then(async (githubUser) => {
         await this.octokit?.request(COMMITS_URL, {
           owner: githubUser.login,
