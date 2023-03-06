@@ -29,7 +29,7 @@
       </mat-chip-listbox>
 
       <div class="d-flex justify-content-start align-items-center mt-3">
-        <div class="development-language d-flex justify-content-start align-items-center me-2" *ngIf="!!repo?.language">
+        <div class="development-language d-flex justify-content-start align-items-center me-4" *ngIf="!!repo?.language">
           <mat-icon
             [style.color]="getLanguageColor()"
             class="me-1 repo-general-info-icon">
@@ -38,7 +38,7 @@
           {{repo?.language}}
         </div>
 
-        <div class="licence d-flex justify-content-start align-items-center me-2" *ngIf="repo?.license">
+        <div class="licence d-flex justify-content-start align-items-center me-4" *ngIf="repo?.license">
           <mat-icon class="me-1 repo-general-info-icon text-dark">
             balance
           </mat-icon>
@@ -46,7 +46,7 @@
         </div>
 
         <div class="last-updated d-flex justify-content-start align-items-center">
-
+          updated {{lastUpdated()}}
         </div>
       </div>
     </mat-card-content>

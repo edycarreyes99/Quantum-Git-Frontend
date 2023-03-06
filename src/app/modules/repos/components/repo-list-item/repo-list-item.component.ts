@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {IRepo} from "../../interfaces/repo";
 import {DevelopmentLanguageColors} from "../../../../core/utils/development-language-colors";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-repo-list-item',
@@ -21,5 +22,10 @@ export class RepoListItemComponent {
     const colors = DevelopmentLanguageColors;
 
     return colors.find((color) => color.name === this.repo?.language)?.color
+  }
+
+  // Returns the time passed from the last updated from now
+  lastUpdated() {
+    return moment(this.repo?.updated_at).fromNow();
   }
 }
