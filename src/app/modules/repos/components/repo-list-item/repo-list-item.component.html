@@ -2,9 +2,9 @@
   <mat-card class="shadow-none border-0 bg-light">
     <mat-card-header>
       <mat-card-title class="d-flex justify-content-start align-items-center">
-        <div class="title text-primary fw-semibold">
+        <a class="title text-primary fw-semibold" [routerLink]="[repo?.id, 'commits']">
           {{repo?.name}}
-        </div>
+        </a>
 
         <mat-chip-option
           class="bg-transparent border ms-2 p-0"

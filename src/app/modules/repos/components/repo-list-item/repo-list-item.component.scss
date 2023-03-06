@@ -1,5 +1,7 @@
 .repo-list-item-component {
   .title {
+    text-decoration: none;
+
     &:hover {
       cursor: pointer;
       text-decoration: underline;
