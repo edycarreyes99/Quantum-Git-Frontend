@@ -29,10 +29,14 @@ export class ReposListComponent implements OnInit {
     await this.fetchAllRepos();
   }
 
-  async fetchAllRepos(): Promise<IRepo[]> {
+  async fetchAllRepos(page?: number | undefined): Promise<IRepo[]> {
     return new Promise<IRepo[]>(async (resolve, rejects) => {
       this.loading = true;
       const paginationOptions = new RepoPaginationOptions();
+
+      if (!!page)
+        paginationOptions.page = page;
+
       await this.reposService.index(paginationOptions).then((repos) => {
         this.repos = repos;
         this.loading = false;
@@ -42,12 +46,22 @@ export class ReposListComponent implements OnInit {
           if (!this.empty)
             this.quantumGitPaginator?.parsePaginationString(this.repos[0].pagination)
         }, 500);
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
         resolve(repos);
       }).catch((error) => {
         console.error('Error fetching repos:', error);
         this.loading = false;
         if (this.repos.length === 0)
           this.empty = true;
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
         rejects(error);
       });
     });

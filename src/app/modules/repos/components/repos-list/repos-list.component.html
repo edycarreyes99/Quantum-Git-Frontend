@@ -9,7 +9,13 @@
     </ng-container>
 
     <div class="mb-5 paginator">
-      <app-quantum-git-paginator #quantumGitPaginator></app-quantum-git-paginator>
+      <app-quantum-git-paginator
+        #quantumGitPaginator
+        (firstPage)="fetchAllRepos($event)"
+        (previousPage)="fetchAllRepos($event)"
+        (nextPage)="fetchAllRepos($event)"
+        (lastPage)="fetchAllRepos($event)"
+      ></app-quantum-git-paginator>
     </div>
   </ng-container>
 
