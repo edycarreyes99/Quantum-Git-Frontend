@@ -16,6 +16,7 @@ export class BranchSelectionComponent implements OnInit {
 
   // Output Variables
   @Output() selectionChange: EventEmitter<IBranch>;
+  @Output() emptyBranches: EventEmitter<void>;
 
   // Component Variables
   branchFormControl: FormControl;
@@ -26,6 +27,7 @@ export class BranchSelectionComponent implements OnInit {
     private branchesService: BranchesService
   ) {
     this.selectionChange = new EventEmitter<IBranch>();
+    this.emptyBranches = new EventEmitter<void>();
     this.branchFormControl = new FormControl<string>('');
     this.initializeFilteredBranchesObservable();
   }
@@ -49,6 +51,8 @@ export class BranchSelectionComponent implements OnInit {
         if (this.branches.length !== 0) {
           this.branchFormControl.setValue(this.branches[0]);
           this.selectionChange.emit(this.branchFormControl.value);
+        } else {
+          this.emptyBranches.emit();
         }
         resolve(branches);
       }).catch((error) => {

@@ -10,6 +10,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatDividerModule} from "@angular/material/divider";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -18,14 +19,15 @@ import {MatDividerModule} from "@angular/material/divider";
     CommitsListComponent,
     CommitsListItemComponent
   ],
-  imports: [
-    CommonModule,
-    CommitsRoutingModule,
-    BranchesModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatDividerModule
-  ]
+    imports: [
+        CommonModule,
+        CommitsRoutingModule,
+        BranchesModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatDividerModule,
+        MatProgressSpinnerModule
+    ]
 })
 export class CommitsModule { }

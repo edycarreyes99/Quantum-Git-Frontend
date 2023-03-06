@@ -17,6 +17,8 @@ export class CommitsListComponent {
   selectedBranch: IBranch | undefined;
   commits: ICommit[] = [];
   groupedCommits: IGroupedCommits[] = [];
+  loading = true;
+  empty = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,12 +31,18 @@ export class CommitsListComponent {
 
   fetchCommits(): Promise<ICommit[]> {
     return new Promise<ICommit[]>(async (resolve, rejects) => {
+      this.loading = true;
       await this.commitsService.index(this.selectedBranch?.commit.sha ?? '', this.repoName ?? '')
         .then((commits) => {
           this.commits = commits;
           this.groupCommitsByDate();
+          if (this.commits.length === 0)
+            this.empty = true;
+
+          this.loading = false;
           resolve(commits);
         }).catch((error) => {
+          this.loading = false;
           rejects(error);
         });
     });
