@@ -5,6 +5,8 @@ import {RepoPaginationOptions} from "../../models/repo-pagination-options";
 import {
   QuantumGitPaginatorComponent
 } from "../../../../core/components/quantum-git-paginator/quantum-git-paginator.component";
+import {NotificationsService} from "../../../../core/services/notifications/notifications.service";
+import {ERROR_TOAST, WARNING_TOAST} from "../../../../core/constants/toast.constants";
 
 @Component({
   selector: 'app-repos-list',
@@ -21,7 +23,8 @@ export class ReposListComponent implements OnInit {
   empty: boolean = false;
 
   constructor(
-    private reposService: ReposService
+    private reposService: ReposService,
+    private notificationService: NotificationsService
   ) {
   }
 
@@ -51,6 +54,14 @@ export class ReposListComponent implements OnInit {
           left: 0,
           behavior: 'smooth'
         });
+        if (this.empty) {
+          this.notificationService
+            .showToast(
+              WARNING_TOAST,
+              'Content is empty',
+              'The repositories list is empty.'
+            );
+        }
         resolve(repos);
       }).catch((error) => {
         console.error('Error fetching repos:', error);
@@ -62,6 +73,11 @@ export class ReposListComponent implements OnInit {
           left: 0,
           behavior: 'smooth'
         });
+        this.notificationService.showToast(
+          ERROR_TOAST,
+          'Error Fetching Repos',
+          'An error occurred while fetching the repos list.'
+        );
         rejects(error);
       });
     });
