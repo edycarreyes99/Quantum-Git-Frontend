@@ -3,6 +3,10 @@
     width: 100%;
   }
 
+  .scaled-icon {
+    transform: scale(.7);
+  }
+
   @media screen and (min-width: 900px) {
     .branch-selection {
       width: 50%;

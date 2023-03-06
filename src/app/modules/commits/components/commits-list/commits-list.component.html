@@ -1,16 +1,35 @@
 <div class="commits-list-component">
-  <div class="branch-selection">
+
+  <div class="header d-flex justify-content-start align-items-center">
+    <a mat-icon-button class="me-2" [routerLink]="['../../']">
+      <mat-icon class="material-icons-outlined">arrow_back</mat-icon>
+    </a>
+    <h1 class="p-0 m-0">Commits of {{repoName}} repository</h1>
+  </div>
+
+  <div class="branch-selection mt-4">
     <app-branch-selection
       [repoName]="repoName"
       (selectionChange)="selectedBranch = $event; fetchCommits();"
     ></app-branch-selection>
   </div>
 
-  <app-commits-list-item
-    *ngFor="let commit of commits; let isFirst = first; let isLast = last;"
-    [commit]="commit"
-    [isFirstInList]="isFirst"
-    [isLastInList]="isLast"
-    [repoName]="repoName">
-  </app-commits-list-item>
+  <div class="commit-group mb-4 border-start ps-4 mt-2" *ngFor="let commitsGroup of groupedCommits; let isLast = last;">
+    <div class="commit-group-title d-flex justify-content-start align-items-center">
+      <mat-icon class="material-icons-outlined scaled-icon me-2">commit</mat-icon>
+      <span class="fw-bold fs-6">Commits on {{commitsGroup.date}}</span>
+    </div>
+
+    <div class="commit-list-item mt-2">
+      <app-commits-list-item
+        *ngFor="let commit of commitsGroup.commits; let isFirst = first; let isLast = last;"
+        [commit]="commit"
+        [isFirstInList]="isFirst"
+        [isLastInList]="isLast"
+        [repoName]="repoName">
+      </app-commits-list-item>
+    </div>
+
+    <mat-divider class="mt-4" *ngIf="!isLast"></mat-divider>
+  </div>
 </div>

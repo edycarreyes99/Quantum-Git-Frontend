@@ -3,6 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 import {IBranch} from "../../../branches/interfaces/branch";
 import {CommitsService} from "../../services/commits.service";
 import {ICommit} from "../../interfaces/commit";
+import * as moment from "moment";
+import {IGroupedCommits} from "../../interfaces/grouped-commits";
 
 @Component({
   selector: 'app-commits-list',
@@ -14,6 +16,7 @@ export class CommitsListComponent {
   repoName: string | undefined;
   selectedBranch: IBranch | undefined;
   commits: ICommit[] = [];
+  groupedCommits: IGroupedCommits[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,7 +32,7 @@ export class CommitsListComponent {
       await this.commitsService.index(this.selectedBranch?.commit.sha ?? '', this.repoName ?? '')
         .then((commits) => {
           this.commits = commits;
-          // this.groupCommitsByDate();
+          this.groupCommitsByDate();
           resolve(commits);
         }).catch((error) => {
           rejects(error);
@@ -39,13 +42,28 @@ export class CommitsListComponent {
 
   // Method to group the commits by date
   groupCommitsByDate() {
-    let i: number = 0;
-    let len: number = this.commits.length;
-    const groupedCommits: ICommit[][] = [];
-    const currentDateCommits: ICommit[] = [];
+    const groupedCommits: IGroupedCommits[] = [];
+    let currentDateCommits: ICommit[] = [];
 
-    while (i < len) {
-    }
+    this.commits.forEach((commit, index, arr) => {
+      const currentCommitDate = moment(commit.commit.committer.date).format('MMM DD, YYYY');
+      const nextCommitDate = moment(arr[index + 1]?.commit?.committer?.date).format('MMM DD, YYYY')
+
+      if (currentCommitDate === nextCommitDate) {
+        currentDateCommits.push(commit);
+      } else {
+        currentDateCommits.push(commit);
+        groupedCommits.push({
+          date: currentCommitDate,
+          commits: currentDateCommits
+        });
+        currentDateCommits = [];
+      }
+    });
+
+    console.log('Grouped commits are:', groupedCommits);
+
+    this.groupedCommits = groupedCommits;
 
   }
 

@@ -4,6 +4,11 @@ import {ReposViewComponent} from "./components/repos-view/repos-view.component";
 
 const routes: Routes = [
   {
+    path: ':repoName',
+    redirectTo: ':repoName/commits',
+    pathMatch: 'full'
+  },
+  {
     path: '',
     component: ReposViewComponent
   },

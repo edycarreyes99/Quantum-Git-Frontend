@@ -9,6 +9,7 @@ import {BranchesModule} from "../branches/branches.module";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatDividerModule} from "@angular/material/divider";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     BranchesModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDividerModule
   ]
 })
 export class CommitsModule { }
