@@ -58,7 +58,6 @@ export class CommitsListComponent {
             left: 0,
             behavior: 'smooth'
           });
-          console.log('Commits are:', this.commits);
           resolve(commits);
         }).catch((error) => {
           this.loading = false;
