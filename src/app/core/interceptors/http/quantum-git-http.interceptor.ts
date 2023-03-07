@@ -24,7 +24,7 @@ export class QuantumGitHttpInterceptor implements HttpInterceptor {
       }
     }
 
-    return from(this.authService.getToken()).pipe(
+    return from(this.authService.getCurrentUserJwtToken()).pipe(
       switchMap((token: string) => {
         const req = request.clone({
           url: request.url,

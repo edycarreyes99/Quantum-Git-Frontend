@@ -100,7 +100,7 @@ export class AuthService {
   }
 
   // Method to get the current user JWT
-  public getToken(): Promise<string> {
+  public getCurrentUserJwtToken(): Promise<string> {
     return new Promise((resolve, reject) => {
       this.angularFireAuth.authState.subscribe({
         next: async (user) => {
