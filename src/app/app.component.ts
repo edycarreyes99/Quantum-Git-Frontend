@@ -16,18 +16,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        switch (event.url) {
-          case '/auth/login' :
-          case '/':
-          case '':
-            this.showNavigations = false;
-            break;
-          default : {
-            this.showNavigations = true;
-          }
-        }
+    this.router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        this.showNavigations = val.url !== '/auth/login';
       }
     });
   }

@@ -19,7 +19,7 @@ export class AuthenticatedGuard implements CanActivate {
     if (this.authService.getCurrentUserFromFirebase()) {
       return true;
     } else {
-      this.router.navigate(['/auth']);
+      this.router.navigate(['auth/login']);
       return false;
     }
   }

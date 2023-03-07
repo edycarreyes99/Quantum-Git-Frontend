@@ -18,7 +18,7 @@ export class NoAuthenticatedGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.authService.getCurrentUserFromFirebase()) {
-      this.router.navigate(['/auth/login']);
+      this.router.navigate(['/repos']);
       return false;
     } else {
       return true;
