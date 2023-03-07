@@ -9,6 +9,7 @@ import {
   QuantumGitPaginatorComponent
 } from "../../../../core/components/quantum-git-paginator/quantum-git-paginator.component";
 import {NotificationsService} from "../../../../core/services/notifications/notifications.service";
+import {ERROR_TOAST} from "../../../../core/constants/toast.constants";
 
 @Component({
   selector: 'app-commits-list',
@@ -66,7 +67,11 @@ export class CommitsListComponent {
             left: 0,
             behavior: 'smooth'
           });
-
+          this.notificationsService.showToast(
+            ERROR_TOAST,
+            'Error fetching commits',
+            'An error occurred while fetching the commit list for the current repository.'
+          );
           rejects(error);
         });
     });
