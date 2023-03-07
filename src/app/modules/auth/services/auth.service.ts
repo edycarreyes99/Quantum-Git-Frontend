@@ -98,4 +98,22 @@ export class AuthService {
       resolve();
     });
   }
+
+  // Method to get the current user JWT
+  public getToken(): Promise<string> {
+    return new Promise((resolve, reject) => {
+      this.angularFireAuth.authState.subscribe({
+        next: async (user) => {
+          if (user) {
+            const token = await user.getIdToken();
+            resolve(token);
+          }
+        },
+        error: (error) => {
+          console.error('Error fetching user JWT', error);
+          reject(error);
+        }
+      });
+    });
+  }
 }
