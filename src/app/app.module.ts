@@ -13,6 +13,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
 import {ToastrModule} from "ngx-toastr";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {QuantumGitHttpInterceptor} from "./core/interceptors/http/quantum-git-http.interceptor";
 
 @NgModule({
   declarations: [
@@ -33,7 +35,12 @@ import {ToastrModule} from "ngx-toastr";
   providers: [
     {
       provide: FIREBASE_OPTIONS, useValue: environment.FIREBASE_CONFIG
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: QuantumGitHttpInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })
