@@ -39,8 +39,4 @@ export class LoginFormComponent {
         });
     });
   }
-
-  async logout(): Promise<void> {
-    await this.authService.logout();
-  }
 }
