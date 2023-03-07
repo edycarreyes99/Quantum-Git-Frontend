@@ -58,6 +58,7 @@ export class CommitsListComponent {
             left: 0,
             behavior: 'smooth'
           });
+          console.log('Commits are:', this.commits);
           resolve(commits);
         }).catch((error) => {
           this.loading = false;
@@ -83,6 +84,15 @@ export class CommitsListComponent {
 
       if (currentCommitDate === nextCommitDate) {
         currentDateCommits.push(commit);
+
+        if (arr.length === 1) {
+          groupedCommits.push({
+            date: currentCommitDate,
+            commits: currentDateCommits
+          });
+          currentDateCommits = [];
+        }
+
       } else {
         currentDateCommits.push(commit);
         groupedCommits.push({
