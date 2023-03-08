@@ -1,3 +1,7 @@
+<div style="display: flex; justify-content: center; align-items: center;">
+<img src="src/assets/img/quantum-git-logo.svg" width="200">
+</div>
+
 # QuantumGit
 
 **Built to track all commits of a git repository with your GitHub account.**
@@ -75,6 +79,7 @@ The dependencies that I use in this project, all of them are very useful, and th
   notifications in the UI.
 
 ## Attachments
+
 ![](src/assets/img/readme-files/login.png)
 ![](src/assets/img/readme-files/repos.png)
 ![](src/assets/img/readme-files/repos-pagination.png)
