@@ -38,11 +38,11 @@
   <ng-container *ngIf="!loading && !empty">
     <div class="mb-5 paginator">
       <app-quantum-git-paginator
-        #quantumGitPaginator
         (firstPage)="fetchCommits($event)"
         (previousPage)="fetchCommits($event)"
         (nextPage)="fetchCommits($event)"
         (lastPage)="fetchCommits($event)"
+        [pagination]="pagination"
       ></app-quantum-git-paginator>
     </div>
   </ng-container>

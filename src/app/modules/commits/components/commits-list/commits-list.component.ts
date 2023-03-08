@@ -1,15 +1,13 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {IBranch} from "../../../branches/interfaces/branch";
 import {CommitsService} from "../../services/commits.service";
 import {ICommit} from "../../interfaces/commit";
 import * as moment from "moment";
 import {IGroupedCommits} from "../../interfaces/grouped-commits";
-import {
-  QuantumGitPaginatorComponent
-} from "../../../../core/components/quantum-git-paginator/quantum-git-paginator.component";
 import {NotificationsService} from "../../../../core/services/notifications/notifications.service";
 import {ERROR_TOAST} from "../../../../core/constants/toast.constants";
+import {IPagination} from "../../../../core/interfaces/pagination";
 
 @Component({
   selector: 'app-commits-list',
@@ -17,16 +15,14 @@ import {ERROR_TOAST} from "../../../../core/constants/toast.constants";
   styleUrls: ['./commits-list.component.scss']
 })
 export class CommitsListComponent {
-  // ViewChild Variables
-  @ViewChild('quantumGitPaginator') quantumGitPaginator: QuantumGitPaginatorComponent | undefined;
-
-  // Component Variable
+  // Component Variables
   repoName: string | undefined;
   selectedBranch: IBranch | undefined;
   commits: ICommit[] = [];
   groupedCommits: IGroupedCommits[] = [];
   loading = true;
   empty = false;
+  pagination: IPagination | undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -51,13 +47,17 @@ export class CommitsListComponent {
           this.commits = commitsResponse.data;
           this.groupCommitsByDate();
 
+          const {first, previous, next, last} = {...commitsResponse};
+
+          this.pagination = {
+            first,
+            previous,
+            next,
+            last
+          };
+
           if (this.commits.length === 0)
             this.empty = true;
-
-          setTimeout(() => {
-            if (!this.empty)
-              this.quantumGitPaginator?.setPagination(commitsResponse);
-          }, 500);
 
           this.loading = false;
 
