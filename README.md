@@ -1,5 +1,5 @@
-<div style="display: flex; justify-content: center; align-items: center;">
-<img src="src/assets/img/quantum-git-logo.svg" width="200">
+<div style="width: 100%; display: flex; justify-content: center; align-items: center;">
+<img src="src/assets/img/quantum-git-logo.svg" width="200" alt="Quantum Git Logo">
 </div>
 
 # QuantumGit
