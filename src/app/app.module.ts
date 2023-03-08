@@ -13,7 +13,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
 import {ToastrModule} from "ngx-toastr";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {QuantumGitHttpInterceptor} from "./core/interceptors/http/quantum-git-http.interceptor";
 
 @NgModule({
@@ -30,7 +30,8 @@ import {QuantumGitHttpInterceptor} from "./core/interceptors/http/quantum-git-ht
     MatTooltipModule,
     MatCardModule,
     MatIconModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    HttpClientModule
   ],
   providers: [
     {
