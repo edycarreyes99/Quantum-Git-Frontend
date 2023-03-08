@@ -7,17 +7,14 @@ import {IPagination} from "../../interfaces/pagination";
   styleUrls: ['./quantum-git-paginator.component.scss']
 })
 export class QuantumGitPaginatorComponent {
-  // Input Pagination String
-  @Input() paginationString: string = '';
+  // Input Variables
+  @Input() pagination: IPagination | undefined;
 
   // Output Variables
   @Output() firstPage: EventEmitter<number>;
   @Output() previousPage: EventEmitter<number>;
   @Output() nextPage: EventEmitter<number>;
   @Output() lastPage: EventEmitter<number>;
-
-  // Component variables
-  pagination: IPagination | undefined;
 
   constructor() {
     this.firstPage = new EventEmitter<number>();
@@ -26,36 +23,8 @@ export class QuantumGitPaginatorComponent {
     this.lastPage = new EventEmitter<number>();
   }
 
-  // Method to parse the pagination string to objects
-  parsePaginationString(paginationString?: string | undefined): IPagination {
-    if (!!paginationString)
-      this.paginationString = paginationString;
-
-    const paginationArray = this.paginationString.match(/<([^;]*)>; rel="([^;]*)"/g);
-    const pagination: IPagination = {
-      first: null,
-      previous: null,
-      next: null,
-      last: null
-    };
-
-    paginationArray?.forEach((link: string) => {
-      const urlParams = new URLSearchParams(link.match(/<([^;]*)>/g)?.at(0));
-      const page = parseInt(urlParams.get('page') ?? '0', 10);
-      if (link.includes('prev')) {
-        pagination.previous = page;
-      } else if (link.includes('first')) {
-        pagination.first = page;
-      } else if (link.includes('next')) {
-        pagination.next = page;
-      } else if (link.includes('last')) {
-        pagination.last = page;
-      }
-    });
-
+  // Method to set the pagination object
+  setPagination(pagination: IPagination): void {
     this.pagination = pagination;
-
-    return pagination;
   }
-
 }
