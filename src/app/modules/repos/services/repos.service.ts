@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 @Injectable({
   providedIn: 'root'
 })
-export class ReposService extends CRUD<IRepo> {
+export class ReposService extends CRUD<IRepo, IRepo[]> {
   protected constructor(
     protected override http: HttpClient,
   ) {

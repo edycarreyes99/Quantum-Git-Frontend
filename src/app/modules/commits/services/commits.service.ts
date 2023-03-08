@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 @Injectable({
   providedIn: 'root'
 })
-export class CommitsService extends CRUD<ICommit> {
+export class CommitsService extends CRUD<ICommit, ICommit[]> {
   constructor(
     protected override http: HttpClient
   ) {

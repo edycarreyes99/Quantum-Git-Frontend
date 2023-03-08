@@ -8,7 +8,7 @@ import {HttpClient} from "@angular/common/http";
 @Injectable({
   providedIn: 'root'
 })
-export class BranchesService extends CRUD<IBranch> {
+export class BranchesService extends CRUD<IBranch, IBranch[]> {
   protected constructor(
     private authService: AuthService,
     protected override http: HttpClient
