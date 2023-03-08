@@ -41,26 +41,34 @@ export class CommitsListComponent {
   fetchCommits(page?: number | undefined): Promise<ICommit[]> {
     return new Promise<ICommit[]>(async (resolve, rejects) => {
       this.loading = true;
-      await this.commitsService.index(this.selectedBranch?.commit.sha ?? '', this.repoName ?? '', page)
-        .then((commits) => {
-          this.commits = commits;
+      await this.commitsService.index({
+        repo: this.repoName ?? '',
+        sha: this.selectedBranch?.commit?.sha ?? '',
+        page,
+        per_page: 35
+      }).subscribe({
+        next: (commitsResponse) => {
+          this.commits = commitsResponse.data;
           this.groupCommitsByDate();
+
           if (this.commits.length === 0)
             this.empty = true;
 
           setTimeout(() => {
             if (!this.empty)
-              this.quantumGitPaginator?.parsePaginationString(this.commits[0].pagination)
+              this.quantumGitPaginator?.setPagination(commitsResponse);
           }, 500);
 
           this.loading = false;
+
           window.scroll({
             top: 0,
             left: 0,
             behavior: 'smooth'
           });
-          resolve(commits);
-        }).catch((error) => {
+          resolve(commitsResponse.data);
+        },
+        error: (error) => {
           this.loading = false;
           window.scroll({
             top: 0,
@@ -73,7 +81,8 @@ export class CommitsListComponent {
             'An error occurred while fetching the commit list for the current repository.'
           );
           rejects(error);
-        });
+        }
+      });
     });
   }
 
