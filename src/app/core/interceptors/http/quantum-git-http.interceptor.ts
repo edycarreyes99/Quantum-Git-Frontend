@@ -23,9 +23,6 @@ export class QuantumGitHttpInterceptor implements HttpInterceptor {
       switchMap((token: string) => {
         const req = request.clone({
           url: request.url,
-          setParams: {
-            token,
-          },
           setHeaders: {
             Authorization: 'Bearer ' + token,
             Secondary_Authorization: this.authService.getCurrentGitHubUserAccessToken()
