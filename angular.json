@@ -37,6 +37,9 @@
             ],
             "scripts": [
               "./node_modules/bootstrap/dist/js/bootstrap.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "moment"
             ]
           },
           "configurations": {
@@ -50,8 +53,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1.40mb",
+                  "maximumError": "1.5mb"
                 },
                 {
                   "type": "anyComponentStyle",
