@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
 import {BranchesService} from "../../services/branches.service";
 import {IBranch} from "../../interfaces/branch";
 import {NotificationsService} from "../../../../core/services/notifications/notifications.service";
@@ -48,24 +47,30 @@ export class BranchSelectionComponent implements OnInit {
   // Method to fetch all branches for the current repo
   fetchBranchesFromRepo(): Promise<IBranch[]> {
     return new Promise<IBranch[]>(async (resolve, rejects) => {
-      await this.branchesService.index(this.repoName ?? '').then((branches) => {
-        this.branches = branches;
-        this.initializeFilteredBranchesObservable();
-        if (this.branches.length !== 0) {
-          this.branchFormControl.setValue(this.branches[0]);
-          this.selectionChange.emit(this.branchFormControl.value);
-        } else {
-          this.emptyBranches.emit();
+      await this.branchesService.index({
+        repo: this.repoName,
+        per_page: 100
+      }).subscribe({
+        next: (branchesResponse) => {
+          this.branches = branchesResponse.data;
+          this.initializeFilteredBranchesObservable();
+          if (this.branches.length !== 0) {
+            this.branchFormControl.setValue(this.branches[0]);
+            this.selectionChange.emit(this.branchFormControl.value);
+          } else {
+            this.emptyBranches.emit();
+          }
+          resolve(branchesResponse.data);
+        },
+        error: (error) => {
+          console.error('Error fetching branches for the current repository:', error);
+          this.notificationsService.showToast(
+            ERROR_TOAST,
+            'Error Fetching Branches',
+            'An error occurred while fetching branches for the curren repository.'
+          );
+          rejects(error);
         }
-        resolve(branches);
-      }).catch((error) => {
-        console.error('Error fetching branches for the current repository:', error);
-        this.notificationsService.showToast(
-          ERROR_TOAST,
-          'Error Fetching Branches',
-          'An error occurred while fetching branches for the curren repository.'
-        );
-        rejects(error);
       });
     });
   }
