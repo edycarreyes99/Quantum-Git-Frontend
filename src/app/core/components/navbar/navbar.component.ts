@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {AuthService} from "../../../modules/auth/services/auth.service";
-import {User} from '@angular/fire/auth';
 import {ActivatedRoute, Router} from "@angular/router";
 import {IUser} from "../../../modules/users/interfaces/user";
 import {NotificationsService} from "../../services/notifications/notifications.service";
 import {ERROR_TOAST, SUCCESS_TOAST} from "../../constants/toast.constants";
+import {UsersService} from "../../../modules/users/services/users.service";
 
 @Component({
   selector: 'app-navbar',
@@ -16,16 +16,25 @@ export class NavbarComponent {
 
   constructor(
     private authService: AuthService,
+    private usersService: UsersService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private notificationsService: NotificationsService
   ) {
     this.activatedRoute.params.subscribe(async () => {
-      await this.authService.getCurrentUserFromGitHub().then((githubUser) => {
-        this.user = githubUser;
-      }).catch((error) => {
-        console.error('Error fetching user from github:', error);
-      })
+      await this.usersService.show().subscribe({
+        next: (user) => {
+          this.user = user;
+        },
+        error: (error) => {
+          console.error('Error fetching current user from github:', error);
+          this.notificationsService.showToast(
+            ERROR_TOAST,
+            'Error fetching GitHub User',
+            'Error while fetching the current authenticated GitHub user info.'
+          );
+        }
+      });
     })
   }
 

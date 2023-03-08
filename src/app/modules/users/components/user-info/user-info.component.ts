@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../../auth/services/auth.service";
 import {IUser} from "../../interfaces/user";
+import {UsersService} from "../../services/users.service";
+import {NotificationsService} from "../../../../core/services/notifications/notifications.service";
+import {ERROR_TOAST} from "../../../../core/constants/toast.constants";
 
 @Component({
   selector: 'app-user-info',
@@ -12,7 +14,8 @@ export class UserInfoComponent implements OnInit {
   user: IUser | undefined;
 
   constructor(
-    private authService: AuthService
+    private usersService: UsersService,
+    private notificationsService: NotificationsService
   ) {
   }
 
@@ -22,12 +25,20 @@ export class UserInfoComponent implements OnInit {
 
   fetchCurrentUserFromGitHub(): Promise<IUser> {
     return new Promise<IUser>(async (resolve, rejects) => {
-      await this.authService.getCurrentUserFromGitHub().then((user) => {
-        this.user = user;
-        resolve(user);
-      }).catch((error) => {
-        console.error('Error fetching current user from github:', error);
-        rejects(error);
+      await this.usersService.show().subscribe({
+        next: (user) => {
+          this.user = user;
+          resolve(user);
+        },
+        error: (error) => {
+          console.error('Error fetching current user from github:', error);
+          this.notificationsService.showToast(
+            ERROR_TOAST,
+            'Error fetching GitHub User',
+            'Error while fetching the current authenticated GitHub user info.'
+          );
+          rejects(error);
+        }
       });
     });
   }
