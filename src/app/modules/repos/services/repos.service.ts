@@ -8,7 +8,7 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class ReposService extends CRUD<IRepo, IRepo[]> {
-  protected constructor(
+  constructor(
     protected override http: HttpClient,
   ) {
     super(http, REPOS_URL);

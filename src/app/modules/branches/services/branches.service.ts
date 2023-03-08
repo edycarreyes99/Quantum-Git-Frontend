@@ -9,7 +9,7 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class BranchesService extends CRUD<IBranch, IBranch[]> {
-  protected constructor(
+  constructor(
     private authService: AuthService,
     protected override http: HttpClient
   ) {

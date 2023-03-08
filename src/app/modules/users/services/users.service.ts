@@ -8,7 +8,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class UsersService extends CRUD<IUser, IUser[]> {
 
-  protected constructor(
+  constructor(
     protected override http: HttpClient
   ) {
     super(http, '');
