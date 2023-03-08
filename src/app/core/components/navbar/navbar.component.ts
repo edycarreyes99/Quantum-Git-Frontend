@@ -33,7 +33,6 @@ export class NavbarComponent {
   async logout(): Promise<void> {
     return new Promise<void>(async () => {
       await this.router.navigate(['auth/login']).then(async () => {
-        console.log('Navigation complete');
         await this.authService.logout().then(async () => {
           this.notificationsService.showToast(
             SUCCESS_TOAST,

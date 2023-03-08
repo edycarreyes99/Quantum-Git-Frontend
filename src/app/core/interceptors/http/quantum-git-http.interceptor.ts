@@ -1,10 +1,5 @@
 import {Injectable} from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor
-} from '@angular/common/http';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {from, Observable, switchMap} from 'rxjs';
 import {AuthService} from "../../../modules/auth/services/auth.service";
 
@@ -32,7 +27,8 @@ export class QuantumGitHttpInterceptor implements HttpInterceptor {
             token,
           },
           setHeaders: {
-            Authorization: 'Bearer ' + token
+            Authorization: 'Bearer ' + token,
+            Secondary_Authorization: this.authService.getCurrentGitHubUserAccessToken()
           }
         });
         return next.handle(req);

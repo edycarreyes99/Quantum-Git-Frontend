@@ -105,7 +105,7 @@ export class AuthService {
       this.angularFireAuth.authState.subscribe({
         next: async (user) => {
           if (user) {
-            const token = await user.getIdToken();
+            const token = await user.getIdToken(true);
             resolve(token);
           }
         },
@@ -115,5 +115,9 @@ export class AuthService {
         }
       });
     });
+  }
+
+  public getCurrentGitHubUserAccessToken(): string {
+    return localStorage.getItem(GITHUB_ACCESS_TOKEN_LS) ?? '';
   }
 }

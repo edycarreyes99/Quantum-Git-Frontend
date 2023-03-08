@@ -3,7 +3,6 @@ import {Octokit} from "octokit";
 import {GITHUB_ACCESS_TOKEN_LS} from "../../../core/constants/local-storage.constants";
 import {IRepo} from "../interfaces/repo";
 import {REPOS_URL} from "../../../core/constants/api/repo.constants";
-import {DEFAULT_API_REQUEST_HEADERS} from "../../../core/constants/api/global-api.constants";
 import {IRepoPaginationOptions} from "../interfaces/repo-pagination-options";
 
 @Injectable({
