@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {IPaginatedResponse} from "../interfaces/paginated-response";
 
-export abstract class CRUD<M> implements ICRUD<IPaginatedResponse<M>> {
+export abstract class CRUD<S, M> implements ICRUD<S, IPaginatedResponse<M>> {
   protected constructor(
     protected http: HttpClient,
     private url: string
@@ -18,6 +18,14 @@ export abstract class CRUD<M> implements ICRUD<IPaginatedResponse<M>> {
         ...paginationParams
       }
     })
+  }
+
+  show(id?: string | number, params?: any, additionalURL?: string): Observable<S> {
+    return this.http.get<S>(`${this.url}${id ? `/${id}` : ''}${additionalURL ? `/${additionalURL}` : ''}`, {
+      params: {
+        ...params
+      }
+    });
   }
 
 }
