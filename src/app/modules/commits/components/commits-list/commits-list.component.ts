@@ -39,7 +39,7 @@ export class CommitsListComponent {
       this.loading = true;
       await this.commitsService.index({
         repo: this.repoName ?? '',
-        sha: this.selectedBranch?.commit?.sha ?? '',
+        branch: this.selectedBranch?.commit?.sha ?? '',
         page,
         per_page: 35
       }).subscribe({
